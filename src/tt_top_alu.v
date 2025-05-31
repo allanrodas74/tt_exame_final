@@ -1,4 +1,4 @@
-module top_alu_fpga (
+module tt_alu_fpga (
     input [7:0] ui_in,       // Entradas de usuario (switches)
     input [2:0] uio_in,      // Entradas adicionales (botones)
     output [7:0] uo_out,     // Salidas principales (LEDs)
