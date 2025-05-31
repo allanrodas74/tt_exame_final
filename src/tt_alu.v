@@ -3,7 +3,7 @@ module ALU_8bit (
     input [2:0] ALU_Sel,      // Selector de operación (3 bits)
     output reg [7:0] ALU_Out, // Resultado de 8 bits
     output Zero,              // Bandera de resultado cero
-    output CarryOut           // Bit de acarreo para operaciones aritméticas
+    output reg CarryOut       // Bit de acarreo para operaciones aritméticas
 );
     // Conexión al sumador prefix para suma:
     wire [7:0] sum;
