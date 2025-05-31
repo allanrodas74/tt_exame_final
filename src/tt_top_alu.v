@@ -1,21 +1,16 @@
 module tt_alu_fpga (
-    input [7:0] ui_in,       // Entradas de usuario (switches)
-    input [2:0] uio_in,      // Entradas adicionales (botones)
-    output [7:0] uo_out,     // Salidas principales (LEDs)
-    output [7:0] uio_out,    // Salidas adicionales
-    output [7:0] uio_oe      // Dirección de E/S adicionales
+    input [7:0] ui_in,
+    input [2:0] uio_in,
+    output [7:0] uo_out,
+    output [7:0] uio_out,
+    output [7:0] uio_oe
 );
-    // Asignación de entradas:
-    wire [7:0] A = ui_in;    // Primer operando (switches 0-7)
-    wire [7:0] B = {uio_in[2:0], ui_in[7:3]}; // Segundo operando (combinación de entradas)
-    
-    // Selección de operación con los 3 bits más altos de ui_in
+    wire [7:0] A = ui_in;
+    wire [7:0] B = {uio_in[2:0], ui_in[7:3]};
     wire [2:0] ALU_Sel = ui_in[7:5];
     
-    // Conexión a la ALU de 8 bits:
-    wire [7:0] ALU_Result;   // Resultado de 8 bits
-    wire Zero;               // Bandera Zero
-    wire CarryOut;           // Bandera CarryOut
+    wire [7:0] ALU_Result;
+    wire Zero, CarryOut;
 
     ALU_8bit alu_inst (
         .A(A),
@@ -25,6 +20,11 @@ module tt_alu_fpga (
         .Zero(Zero),
         .CarryOut(CarryOut)
     );
+
+    assign uo_out = ALU_Result;
+    assign uio_out = {6'b0, CarryOut, Zero};
+    assign uio_oe = 8'b11111111;
+endmodule
 
     // Asignación de salidas:
     assign uo_out = ALU_Result;  // Resultado en LEDs principales
