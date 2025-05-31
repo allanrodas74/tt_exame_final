@@ -1,4 +1,3 @@
-
 module tt_um_allanrodas74 (
     input [7:0] ui_in,
     input [2:0] uio_in,
@@ -34,4 +33,3 @@ module tt_um_allanrodas74 (
     assign uio_oe = 8'b11111111;
 
 endmodule
-
